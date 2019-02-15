@@ -5,6 +5,7 @@ find_package(Torch REQUIRED)
 
 # Define our library target
 add_library(dictionary_op SHARED op.cpp)
+
 # Enable C++11
 target_compile_features(dictionary_op PRIVATE cxx_range_for)
 
