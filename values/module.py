@@ -36,11 +36,13 @@ class MyModule(torch.jit.ScriptModule):
         self.my_tuple = torch.jit.Attribute(some_tuple, Tuple[str, int])
 
     @torch.jit.script_method
-    def forward(self, a_tensor, an_int, a_dict, a_tuple):
-        # type: (torch.Tensor, int, Dict[str, int], Tuple[int, int]) -> torch.Tensor
+    def forward(self, a_tensor, an_int, a_dict, a_tuple, an_optional_tuple):
+        # type: (torch.Tensor, int, Dict[str, int], Tuple[int, int], Optional[Tuple[int, str]]) -> torch.Tensor
         value = self.my_tuple[1] + a_tuple[1]
         key = self.my_tuple[0]
         value += a_dict[key]
+        if an_optional_tuple is not None:
+            value += an_optional_tuple[0]
         return a_tensor + an_int + self.my_constant + value
 
 
